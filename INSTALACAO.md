@@ -47,6 +47,13 @@ Abra http://localhost:3000/dashboard. Sem configuração o app roda em **modo lo
 (pasta `.data/`), sem login, com um botão "Ver demonstração com dados fictícios" e o **Laboratório**, que gera vendas,
 visitas e gasto de anúncio de mentira para você entender o painel. Pare com `Ctrl + C` quando terminar.
 
+O Laboratório precisa de uma chave pra cifrar os dados dele. Crie um arquivo `.env.local` só com ela (o app continua
+em modo local) e rode `npm run dev` de novo:
+
+```bash
+echo "ENCRYPTION_KEY=$(node -e "console.log(require('crypto').randomBytes(32).toString('base64'))")" > .env.local
+```
+
 ## 3. Supabase: criar o projeto e aplicar o banco
 
 1. Em supabase.com, crie um **projeto novo só para o Vórtex Rastreio**. Região: **South America (São Paulo)**.

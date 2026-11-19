@@ -90,7 +90,9 @@ PASSOS:
    e depois `npm install`.
 3. (Opcional, recomendo) Mostre funcionando no meu computador antes de criar contas: `npm run dev` e abra
    http://localhost:3000/dashboard. Sem configuração ele roda em "modo local", com um banco no próprio
-   computador e o botão de demonstração com dados fictícios. Mostre também o Laboratório. Depois pare o
+   computador e o botão de demonstração com dados fictícios. Pro Laboratório abrir, gere uma ENCRYPTION_KEY
+   (node -e "console.log(require('crypto').randomBytes(32).toString('base64'))") e grave só ela num
+   .env.local (ENCRYPTION_KEY=...); ele continua em modo local. Mostre também o Laboratório. Depois pare o
    servidor.
 4. Supabase (banco de dados e login, plano grátis): me guie pra criar a conta em supabase.com e um
    projeto NOVO só pra isso (região São Paulo). Eu escolho e guardo a senha do banco. Me ajude a achar o
@@ -147,7 +149,7 @@ npm run dev     # abre em http://localhost:3000/dashboard
 ```
 
 Sem `.env.local` o app roda em **modo local**: banco PGlite na pasta `.data/`, sem login, com dados de demonstração
-e o Laboratório. Para conferir o código: `npm run check` (tipos, lint, testes e build).
+e o Laboratório (o Laboratório pede só a `ENCRYPTION_KEY` no `.env.local`, ver o INSTALACAO.md). Para conferir o código: `npm run check` (tipos, lint, testes e build).
 
 ## Estrutura de pastas
 
