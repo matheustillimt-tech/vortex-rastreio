@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "regions": ["gru1"],
+  "crons": [
+    { "path": "/api/cron/retry-webhooks", "schedule": "*/30 * * * *" },
+    { "path": "/api/cron/sync-meta", "schedule": "20 */6 * * *" }
+  ]
+}

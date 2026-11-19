@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Página de teste do rastreamento (local)</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 48px auto; padding: 0 16px; line-height: 1.5; color: #141413; background: #f4f4f1; }
+    .box { background: #fff; border: 1px solid #e3e3de; border-radius: 12px; padding: 20px; margin: 16px 0; }
+    a.btn, button { display: inline-block; padding: 10px 16px; border-radius: 8px; background: #141413; color: #fff; text-decoration: none; border: 0; cursor: pointer; font: inherit; }
+    input { padding: 9px 10px; border: 1px solid #ccc; border-radius: 8px; font: inherit; }
+    code { background: #eee; padding: 1px 4px; border-radius: 4px; }
+  </style>
+  <script>
+    window.rastro = window.rastro || function () { (rastro.q = rastro.q || []).push(arguments) };
+    // chave do site: ?key=pk_... (banco real) ou a chave do banco local
+    (function () {
+      var k = new URLSearchParams(location.search).get("key");
+      var s = document.createElement("script");
+      s.async = true;
+      s.src = "/t.js";
+      s.setAttribute("data-key", /^pk_[A-Za-z0-9]{16,48}$/.test(k || "") ? k : "pk_devlocal000000000000");
+      s.setAttribute("data-consent", "required");
+      s.setAttribute("data-auto-lead", "true");
+      document.head.appendChild(s);
+    })();
+  </script>
+</head>
+<body>
+  <h1>Página de teste (local)</h1>
+  <p>Simula uma página de vendas com o script instalado. Nenhum dado sai do seu computador.</p>
+
+  <div class="box">
+    <strong>1. Consentimento</strong>
+    <p>O script está com <code>data-consent="required"</code>: nada é enviado antes do aceite.</p>
+    <button onclick="rastro('consent', true); this.textContent='Consentimento dado ✓'">Aceitar cookies</button>
+  </div>
+
+  <div class="box">
+    <strong>2. Lead</strong>
+    <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='Lead enviado ✓'">
+      <input type="email" placeholder="seu@email.com" required />
+      <button type="submit">Quero receber</button>
+    </form>
+    <p><small>O e-mail não é enviado ao rastreador — só o evento "lead".</small></p>
+  </div>
+
+  <div class="box">
+    <strong>3. Link do checkout</strong>
+    <p>Passe o mouse no botão: depois do consentimento o link ganha <code>sck=rst_…</code> e as UTMs.</p>
+    <a class="btn" id="checkout" href="https://pay.kiwify.com.br/EXEMPLO" onclick="event.preventDefault(); document.getElementById('href').textContent=this.href">Comprar (não abre)</a>
+    <p><small>Link final: <code id="href">—</code></small></p>
+  </div>
+
+  <p><a href="/rastreamento">← ver eventos no painel</a></p>
+</body>
+</html>
